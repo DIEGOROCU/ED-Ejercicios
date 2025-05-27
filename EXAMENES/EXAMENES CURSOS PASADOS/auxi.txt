@@ -1,0 +1,51 @@
+// Caso todo igual
+      if (izNum == root() && drNum == root())
+      {
+        // Contamos la cantidad actual
+        if ((izCan + drCan + 1 >= izMaxCan) && (izCan + drCan + 1 >= drMaxCan)){
+          return {izNum, izCan + drCan + 1, izNum, izCan + drCan + 1};
+        }
+        // Devolvemos el maximo acorde
+        else {
+          if (izMaxCan >= drMaxCan){
+            return {izNum, izCan + drCan + 1, izMaxNum, izMaxCan};
+          }
+          else{
+            return {izNum, izCan + drCan + 1, izMaxNum, izMaxCan};
+          }
+        }
+      }
+
+      if (izNum == root() && drNum != root())
+      {
+        // Contamos la cantidad actual
+        if ((izCan + 1 >= izMaxCan) && (izCan + 1 >= drMaxCan)){
+          return {izNum, izCan + 1, izNum, izCan + drCan + 1};
+        }
+        // Devolvemos el maximo acorde
+        else {
+          if (izMaxCan >= drMaxCan){
+            return {izNum, izCan + 1, izMaxNum, izMaxCan};
+          }
+          else{
+            return {izNum, izCan + 1, izMaxNum, izMaxCan};
+          }
+        }
+      }
+
+      if (izNum != root() && drNum == root())
+      {
+        // Contamos la cantidad actual
+        if ((drCan + 1 >= izMaxCan) && (drCan + 1 >= drMaxCan)){
+          return {drNum, drCan + 1, drNum, drCan + drCan + 1};
+        }
+        // Devolvemos el maximo acorde
+        else {
+          if (izMaxCan >= drMaxCan){
+            return {izNum, izCan + 1, izMaxNum, izMaxCan};
+          }
+          else{
+            return {izNum, izCan + 1, izMaxNum, izMaxCan};
+          }
+        }
+      }
