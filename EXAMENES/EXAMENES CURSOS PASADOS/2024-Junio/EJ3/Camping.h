@@ -108,7 +108,6 @@ class Camping {
             throw domain_error("No es titular de ninguna reserva");
         }
         auto itParcela = parcelas_porDia.find(dia);
-
         auto itBuscaDelante = itDia;
         auto itBuscaDetras = itDia;
         bool hayDet = itDia != itParcela->second.begin();

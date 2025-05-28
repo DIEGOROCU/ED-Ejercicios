@@ -1,3 +1,4 @@
+
 /*@ <authors>
  *
  * Nombre, apellidos y usuario del juez (DGXX) de los autores de la solución.
@@ -28,7 +29,7 @@
 
 #include <tuple>
 
-#include "BinTree.h"
+#include "ListLinkedDouble.h"
 
 using namespace std;
 
@@ -45,46 +46,31 @@ using namespace std;
 // ================================================================
 //@ <answer>
 
-
-
-pair<int, int> interes(const BinTree<int> &arbol){
-    if (arbol.empty()){
-        return {0, 0};
-    }
-    else {
-        auto [maxCamIz, maxRutaIz] = interes(arbol.left());
-        auto [maxCamDr, maxRutaDr] = interes(arbol.right());
-        int maxCam = max(maxCamIz, maxCamDr) + arbol.root();
-        int maxRuta = max(maxRutaIz, maxRutaDr);
-        maxRuta = max(maxRuta, maxCamIz + maxCamDr + arbol.root());
-        return {maxCam, maxRuta};
-    }
-}
-
-int max_interes_ruta(const BinTree<int> &montanya){
-    auto [a, b] = interes(montanya);
-    return b;
-}
-
-bool resuelveCaso()
+void resuelveCaso()
 {
 
    // leer los datos de la entrada
-
-   BinTree<int> arbol = read_tree<int>(cin);
-
-   if (arbol.empty())
-      return false;
-
-   else
-   {
-      // resolver el caso posiblemente llamando a otras funciones
-
-      // escribir la solución
-      cout << max_interes_ruta(arbol) << endl;
-
-      return true;
+   string aux;
+   ListLinkedDouble l1, l2;
+   cin >> aux;
+   while (aux != "0"){
+    l1.push_back(aux);
+    cin >> aux;
    }
+   cin >> aux;
+   while (aux != "0"){
+    l2.push_back(aux);
+    cin >> aux;
+   }
+
+   // resolver el caso posiblemente llamando a otras funciones
+
+   l1.interseccion(l2);
+
+   // escribir la solución
+
+   l1.display(cout);
+   cout << endl;
 }
 
 //@ </answer>
@@ -98,8 +84,10 @@ int main()
    auto cinbuf = std::cin.rdbuf(in.rdbuf());
 #endif
 
-   while (resuelveCaso())
-      ;
+   int numCasos;
+   std::cin >> numCasos;
+   for (int i = 0; i < numCasos; ++i)
+      resuelveCaso();
 
    // para dejar todo como estaba al principio
 #ifndef DOMJUDGE

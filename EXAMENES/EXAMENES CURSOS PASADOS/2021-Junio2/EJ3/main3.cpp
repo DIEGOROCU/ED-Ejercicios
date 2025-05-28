@@ -28,7 +28,7 @@
  
  #include <tuple>
  
- #include "Subastas.h"
+ #include "Granja.h"
  
  using namespace std;
  
@@ -47,54 +47,49 @@
  
  bool resuelveCaso()
 {
+
+    // leer los datos de la entrada
     string instruccion;
     cin >> instruccion;
 
-    if (!cin) return false;
+    // fin de la entrada
+    if (!cin)
+    {
+        return false;
+    }
 
-    Subastas clase;
+    // resolver el caso posiblemente llamando a otras funciones
+    Granja clase;
 
-    while (instruccion != "FIN") {
+    while (instruccion != "FIN"){
         try {
-            if (instruccion == "nuevo_participante") {
-                string part;
-                int saldo;
-                cin >> part >> saldo;
-                clase.nuevo_participante(part, saldo);
-                cout << "OK" << endl;
+            if (instruccion == "alta") {
+                string id;
+                int n;
+                cin >> id >> n;
+                clase.alta(id, n);
             }
-            else if (instruccion == "nueva_subasta") {
-                string obj;
-                int puja_min;
-                cin >> obj >> puja_min;
-                clase.nueva_subasta(obj, puja_min);
-                cout << "OK" << endl;
+            else if (instruccion == "datos") {
+                string id, plaga;
+                int n;
+                cin >> id >> plaga >> n;
+                clase.datos(id, plaga, n);
             }
-            else if (instruccion == "nueva_puja") {
-                string part, obj;
-                int cantidad;
-                cin >> part >> obj >> cantidad;
-                clase.nueva_puja(part, obj, cantidad);
-                cout << "OK" << endl;
+            else if (instruccion == "fumigar") {
+                // Ahora devuelve una lista
+                vector<pair<string, int>> res = clase.fumigar();
+                for (const auto& par : res) {
+                    cout << "Fumigar la plaga " << par.second << " del sector " << par.first << endl;
+                }
             }
-            else if (instruccion == "abandonar_casa") {
-                string part;
-                cin >> part;
-                clase.abandonar_casa(part);
-                cout << "OK" << endl;
-            }
-            else if (instruccion == "cerrar_subasta") {
-                string obj;
-                cin >> obj;
-                string ganador = clase.cerrar_subasta(obj);
-                cout << obj << " ha sido ganado por: " << ganador << endl;
-            }
-            else if (instruccion == "subastas_ganadas") {
-                string part;
-                cin >> part;
-                list<string> ganadas = clase.subastas_ganadas(part);
-                cout << part << " ha ganado:";
-                for (const string& obj : ganadas) cout << " " << obj;
+            else if (instruccion == "plagas") {
+                string id;
+                cin >> id;
+                list<pair<string, int>> plagas = clase.plagas(id);
+                cout << "Plagas del sector " << id << " :";
+                for (const auto& par : plagas) {
+                    cout << " " << par.first << " " << par.second;
+                }
                 cout << endl;
             }
         }
@@ -104,7 +99,10 @@
         cin >> instruccion;
     }
 
+    // escribir la solución
+
     cout << "---" << endl;
+
     return true;
 }
  
